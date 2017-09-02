@@ -11,5 +11,5 @@ Dependencies:
 	* compile 'com.j256.ormlite:ormlite-core:5.0'
 
 Resources:
-	* http://ormlite.com/
-	* http://ormlite.com/android/examples/
+* http://ormlite.com/
+* http://ormlite.com/android/examples/

@@ -1,11 +1,22 @@
 package co.devhack.todoapp.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Created by krlosf on 28/08/17.
  */
-
+@DatabaseTable(tableName = "todo")
 public class TodoItem {
+    public static final String ID = "ID";
+    public static final String FINISHED = "FINISHED";
+    public static final String DESCRIPTION = "DESCRIPTION";
+
+    @DatabaseField(generatedId = true, columnName = ID)
+    private Integer id;
+    @DatabaseField(columnName = FINISHED, canBeNull = false)
     private boolean finished;
+    @DatabaseField(columnName = DESCRIPTION, canBeNull = false)
     private String description;
 
     public TodoItem() {

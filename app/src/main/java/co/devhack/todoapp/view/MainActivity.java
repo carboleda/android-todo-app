@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public void refreshTodoList() {
+        mActionListener.getTodoList();
+
         //Notificar al adaptar del cambio en la lista
         rvTodoList.getAdapter().notifyDataSetChanged();
 
