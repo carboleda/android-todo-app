@@ -13,9 +13,14 @@ public class MainContract {
         void refreshTodoList();
 
         void refreshTodoItem(int position);
+
+        void showErrorMessage();
     }
 
     public interface ActionListener {
+
+        void loadTodoList();
+
         List<TodoItem> getTodoList();
 
         void addTodo(String description);

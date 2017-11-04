@@ -1,4 +1,4 @@
-package co.devhack.todoapp;
+package co.devhack.todoapp.helpers;
 
 /**
  * Created by krlosf on 1/09/17.
@@ -16,6 +16,7 @@ import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import co.devhack.todoapp.SingletonApplication;
 import co.devhack.todoapp.model.TodoItem;
 
 /**

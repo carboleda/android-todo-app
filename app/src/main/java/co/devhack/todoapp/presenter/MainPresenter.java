@@ -4,8 +4,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.devhack.todoapp.helpers.Callback;
 import co.devhack.todoapp.model.TodoItem;
 import co.devhack.todoapp.repository.TodoRepository;
+import co.devhack.todoapp.repository.impl.TodoRepositoryDb;
+import co.devhack.todoapp.repository.impl.TodoRepositoryRest;
 
 /**
  * Created by krlosf on 1/09/17.
@@ -14,22 +17,37 @@ import co.devhack.todoapp.repository.TodoRepository;
 public class MainPresenter implements MainContract.ActionListener {
     private MainContract.View view;
     private TodoRepository todoRepository;
-    private List<TodoItem> lstTodoList = new ArrayList<>(0);
+    private List<TodoItem> lstTodoList;
 
     public MainPresenter(MainContract.View view) {
         this.view = view;
-        this.todoRepository = new TodoRepository();
+        this.lstTodoList = new ArrayList<>(0);
+        this.todoRepository = new TodoRepositoryRest();
+    }
+
+    @Override
+    public void loadTodoList() {
+        try {
+            todoRepository.getAll(new Callback() {
+                @Override
+                public void finish(Throwable error, Object result) {
+                    lstTodoList.clear();
+                    if(error != null) {
+                        view.showErrorMessage();
+                    } else {
+                        lstTodoList.addAll((List<TodoItem>) result);
+                    }
+
+                    view.refreshTodoList();
+                }
+            });
+        } catch (SQLException e) {
+            view.showErrorMessage();
+        }
     }
 
     @Override
     public List<TodoItem> getTodoList() {
-        try {
-            lstTodoList.clear();
-            lstTodoList.addAll(todoRepository.getAll());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         return lstTodoList;
     }
 

@@ -1,4 +1,4 @@
-package co.devhack.todoapp;
+package co.devhack.todoapp.helpers;
 
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;

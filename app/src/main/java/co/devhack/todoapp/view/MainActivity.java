@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                         .setAction("Action", null).show();
             }
         });*/
+
+        mActionListener.loadTodoList();
     }
 
     @Override
@@ -71,8 +74,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public void refreshTodoList() {
-        mActionListener.getTodoList();
-
         //Notificar al adaptar del cambio en la lista
         rvTodoList.getAdapter().notifyDataSetChanged();
 
@@ -86,5 +87,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     public void refreshTodoItem(int position) {
         rvTodoList.getAdapter().notifyItemChanged(position);
+    }
+
+    @Override
+    public void showErrorMessage() {
+        Toast.makeText(this, R.string.error_loading_todos, Toast.LENGTH_LONG).show();
     }
 }
